@@ -77,6 +77,12 @@ The default hooks use `.sh` scripts, which require Git Bash or WSL on Windows. T
 - `./scripts/validate-sql-safety.ps1`
 - `./scripts/audit-sql-changes.ps1`
 
+### Hooks behavior
+
+- **format-tsql**: Formats `.sql` files after edit using [poor-mans-t-sql-formatter-cli](https://github.com/TaoK/poor-mans-t-sql-formatter-npm-cli) via `npx`. Requires Node.js.
+- **validate-sql-safety**: Blocks `DROP DATABASE`, `TRUNCATE TABLE`, and `rm -rf /`; warns on `DROP TABLE`. Allows other commands.
+- **audit-sql-changes**: Appends session-end timestamps to `.cursor/mssql-audit.log`.
+
 ## Commands
 
 | Command               | Description                                                            |

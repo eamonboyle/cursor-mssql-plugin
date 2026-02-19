@@ -1,7 +1,39 @@
-# PLACEHOLDER: Validates shell commands for risky SQL-related patterns.
-# Add your own validation logic (e.g., warn on DROP without confirmation).
-# Used by hooks/beforeShellExecution when running on Windows (edit hooks.json to use this instead of .sh).
+# Validates shell commands for risky SQL-related patterns.
+# Blocks dangerous commands (exit 2); allows others with optional warning (exit 0).
+# Used by hooks/beforeShellExecution when running on Windows.
+$ErrorActionPreference = "SilentlyContinue"
 
-Write-Host "[cursor-mssql-plugin] validate-sql-safety: checking command..."
-# Add validation logic here. Example: exit 1 if dangerous pattern detected.
-exit 0
+$commandStr = $env:COMMAND
+if (-not $commandStr -and $args[0]) { $commandStr = $args[0] }
+if (-not $commandStr) {
+  try {
+    $input = [System.Console]::In.ReadToEnd()
+    if ($input) {
+      $json = $input | ConvertFrom-Json
+      $commandStr = $json.command
+    }
+  } catch {}
+}
+
+function Output-Allow { Write-Output '{"decision": "allow"}'; exit 0 }
+function Output-Deny($reason) { Write-Output "{`"decision`": `"deny`", `"reason`": `"$reason`"}"; exit 2 }
+
+if (-not $commandStr) { Output-Allow }
+
+$cmd = $commandStr.ToUpper()
+
+if ($cmd -match 'DROP\s+DATABASE') {
+  Output-Deny "DROP DATABASE is blocked. Use with extreme caution in production."
+}
+if ($cmd -match 'TRUNCATE\s+TABLE') {
+  Output-Deny "TRUNCATE TABLE is blocked. Verify data loss is intended."
+}
+if ($commandStr -match 'rm\s+-rf\s+/') {
+  Output-Deny "Recursive rm on root is blocked."
+}
+if ($cmd -match 'DROP\s+TABLE') {
+  Write-Output '{"decision": "allow", "agentMessage": "Warning: DROP TABLE will permanently delete data. Ensure you have backups."}'
+  exit 0
+}
+
+Output-Allow

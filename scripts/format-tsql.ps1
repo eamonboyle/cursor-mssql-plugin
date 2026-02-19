@@ -1,6 +1,25 @@
-# PLACEHOLDER: Formats T-SQL files. No-op by default.
-# Replace with sqlfmt or your formatter invocation (e.g. sqlfmt -w $args[0]).
-# Used by hooks/afterFileEdit when running on Windows (edit hooks.json to use this instead of .sh).
+# Formats T-SQL files using poor-mans-t-sql-formatter-cli (via npx).
+# Used by hooks/afterFileEdit when running on Windows.
+$ErrorActionPreference = "SilentlyContinue"
 
-Write-Host "[cursor-mssql-plugin] format-tsql: placeholder (add sqlfmt or formatter invocation)"
+$filePath = $args[0]
+if (-not $filePath -and $env:CI -ne "true") {
+  try {
+    $input = [System.Console]::In.ReadToEnd()
+    if ($input) {
+      $json = $input | ConvertFrom-Json
+      $filePath = if ($json.file_path) { $json.file_path } else { $json.filePath }
+    }
+  } catch {}
+}
+
+if (-not $filePath -or -not (Test-Path $filePath)) { exit 0 }
+if (-not $filePath.EndsWith(".sql")) { exit 0 }
+
+if (Get-Command npx -ErrorAction SilentlyContinue) {
+  $null = npx -y poor-mans-t-sql-formatter-cli -f $filePath -g $filePath 2>$null
+  if ($LASTEXITCODE -eq 0) {
+    Write-Host "[cursor-mssql-plugin] format-tsql: formatted $filePath"
+  }
+}
 exit 0
