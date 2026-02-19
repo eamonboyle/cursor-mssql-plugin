@@ -1,0 +1,13 @@
+---
+description: T-SQL data type guidelines. Prefer modern, non-deprecated types and appropriate precision for financial data.
+globs: ["**/*.sql"]
+---
+
+# T-SQL Data Type Guidelines
+
+- Prefer `VARCHAR(n)` over `TEXT`; prefer `NVARCHAR(n)` over `NTEXT`.
+- Prefer `DATETIME2` over `DATETIME` for new columns (better precision and range).
+- Use `DECIMAL(p,s)` or `NUMERIC(p,s)` for money and financial data; avoid `FLOAT` or `REAL` (imprecise).
+- Avoid deprecated types: `IMAGE`, `TEXT`, `NTEXT`.
+- Use `VARBINARY(MAX)` instead of `IMAGE` for binary data.
+- Specify explicit lengths for `VARCHAR`/`NVARCHAR`; avoid `MAX` unless necessary for large values.

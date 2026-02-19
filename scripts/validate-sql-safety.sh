@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Validates shell commands for risky SQL-related patterns.
-# Placeholder: add your own validation logic (e.g., warn on DROP without confirmation).
+# PLACEHOLDER: Validates shell commands for risky SQL-related patterns.
+# Add your own validation logic (e.g., warn on DROP without confirmation).
+# Used by hooks/beforeShellExecution. On Windows, consider using validate-sql-safety.ps1.
 set -euo pipefail
 
 echo "[cursor-mssql-plugin] validate-sql-safety: checking command..."
-# Add validation logic here. Example: exit 1 if dangerous pattern detected.
 exit 0

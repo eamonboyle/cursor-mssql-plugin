@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Formats T-SQL files. Replace with sqlfmt or your formatter if available.
+# PLACEHOLDER: Formats T-SQL files. No-op by default.
+# Replace with sqlfmt or your formatter invocation (e.g. sqlfmt -w "$1").
+# Used by hooks/afterFileEdit. On Windows, consider using format-tsql.ps1.
 set -euo pipefail
 
 echo "[cursor-mssql-plugin] format-tsql: placeholder (add sqlfmt or formatter invocation)"
-# Example: sqlfmt -w "$1"  # if sqlfmt is installed
 exit 0
