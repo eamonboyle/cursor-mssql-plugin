@@ -247,8 +247,59 @@ function resolveMarketplaceSource(source, pluginRoot) {
   return `${normalizedRoot}/${normalizedSource}`;
 }
 
+async function validateSinglePlugin(pluginDir, pluginName) {
+  const manifestPath = path.join(pluginDir, ".cursor-plugin", "plugin.json");
+  const pluginManifest = await readJsonFile(manifestPath, `${pluginName} plugin manifest`);
+  if (!pluginManifest) {
+    return;
+  }
+
+  if (typeof pluginManifest.name !== "string" || !pluginNamePattern.test(pluginManifest.name)) {
+    addError(
+      `${pluginName}: "name" in plugin.json must be lowercase and use only alphanumerics, hyphens, and periods.`
+    );
+  }
+
+  const manifestFields = ["logo", "rules", "skills", "agents", "commands", "hooks", "mcpServers"];
+  for (const field of manifestFields) {
+    const values = extractPathValues(pluginManifest[field]);
+    for (const value of values) {
+      await validateReferencedPath(pluginDir, field, value, pluginName);
+    }
+  }
+
+  await validateComponentFrontmatter(pluginDir, pluginName);
+
+  const hooksPath = path.join(pluginDir, "hooks", "hooks.json");
+  if (!(await pathExists(hooksPath))) {
+    addWarning(`${pluginName}: no hooks/hooks.json file found (only needed when using hooks).`);
+  }
+
+  const mcpPath = path.join(pluginDir, "mcp.json");
+  if (!(await pathExists(mcpPath))) {
+    addWarning(`${pluginName}: no mcp.json file found (only needed when using MCP servers).`);
+  }
+}
+
 async function main() {
   const marketplacePath = path.join(repoRoot, ".cursor-plugin", "marketplace.json");
+  const marketplaceExists = await pathExists(marketplacePath);
+
+  if (!marketplaceExists) {
+    // Single-plugin mode: validate repo root as the plugin
+    const pluginManifestPath = path.join(repoRoot, ".cursor-plugin", "plugin.json");
+    if (!(await pathExists(pluginManifestPath))) {
+      addError("Single-plugin mode: .cursor-plugin/plugin.json is missing.");
+      summarizeAndExit();
+      return;
+    }
+    const pluginManifest = await readJsonFile(pluginManifestPath, "Plugin manifest");
+    const pluginName = pluginManifest?.name ?? "plugin";
+    await validateSinglePlugin(repoRoot, pluginName);
+    summarizeAndExit();
+    return;
+  }
+
   const marketplace = await readJsonFile(marketplacePath, "Marketplace manifest");
   if (!marketplace) {
     summarizeAndExit();

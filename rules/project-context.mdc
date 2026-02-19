@@ -1,0 +1,14 @@
+---
+description: Baseline project context for MSSQL/SQL Server development. Establishes tech stack and MCP integration.
+alwaysApply: true
+---
+
+# Project Context
+
+This project uses **Microsoft SQL Server** (MSSQL) and **T-SQL** for database development.
+
+- **Database**: SQL Server (on-premises, Azure SQL, or compatible)
+- **SQL dialect**: T-SQL
+- **MCP**: When the mssql-mcp server is configured, use its tools (`list_table`, `describe_table`, `read_data`, etc.) to explore schema and run queries before writing or modifying SQL.
+
+Configure mssql-mcp via environment variables or `mcp.json`: `SERVER_NAME`, `DATABASE_NAME`, `DB_USER`, `DB_PASSWORD`, `READONLY`.

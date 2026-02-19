@@ -1,34 +1,78 @@
-# Cursor plugin template
+# MSSQL Cursor Plugin
 
-Build and publish Cursor Marketplace plugins from a single repo.
+One-stop shop for Microsoft SQL Server development in Cursor: T-SQL rules, skills, agents, commands, hooks, and MCP integration.
 
-Two starter plugins are included:
+## Contents
 
-- **starter-simple**: rules and skills only
-- **starter-advanced**: rules, skills, agents, commands, hooks, MCP, and scripts
+- **Rules**: T-SQL coding standards, naming conventions, security guidelines
+- **Skills**: SQL reviewer, schema explorer, T-SQL optimizer
+- **Agents**: Security reviewer, code reviewer
+- **Commands**: `/review-sql`, `/explore-schema`, `/deploy-sql`
+- **Hooks**: Format T-SQL, validate shell safety, session audit
+- **MCP**: mssql-mcp integration for querying and managing your database
 
-## Getting started
+## MCP Configuration
 
-[Use this template](https://github.com/cursor/plugin-template/generate) to create a new repository, then customize:
+This plugin includes [mssql-mcp](https://github.com/eamonboyle/mssql-mcp) for talking to your MSSQL server through Cursor. After installing the plugin, configure your database connection:
 
-1. `.cursor-plugin/marketplace.json`: set marketplace `name`, `owner`, and `metadata`.
-2. `plugins/*/.cursor-plugin/plugin.json`: set `name` (lowercase kebab-case), `displayName`, `author`, `description`, `keywords`, `license`, and `version`.
-3. Replace placeholder rules, skills, agents, commands, hooks, scripts, and logos.
+1. Edit `mcp.json` (at repo root) or set environment variables before Cursor starts.
+2. Required: `SERVER_NAME`, `DATABASE_NAME`, `DB_USER`, `DB_PASSWORD`
+3. Optional: `READONLY` (true/false), `DATABASES` (comma-separated for multi-db), `TRUST_SERVER_CERTIFICATE` (true for self-signed certs)
 
-To add more plugins, see `docs/add-a-plugin.md`.
+### Using the npm package
 
-## Single plugin vs multi-plugin
+The default config uses `npx -y @eamonboyle/mssql-mcp`. Set env vars or edit `mcp.json`:
 
-This template defaults to **multi-plugin** (multiple plugins in one repo).
+```json
+{
+  "mcpServers": {
+    "mssql": {
+      "command": "npx",
+      "args": ["-y", "@eamonboyle/mssql-mcp"],
+      "env": {
+        "SERVER_NAME": "localhost",
+        "DATABASE_NAME": "YourDatabase",
+        "DB_USER": "your_username",
+        "DB_PASSWORD": "your_password",
+        "READONLY": "false"
+      }
+    }
+  }
+}
+```
 
-For a **single plugin**, move your plugin folder contents to the repository root, keep one `.cursor-plugin/plugin.json`, and remove `.cursor-plugin/marketplace.json`.
+### Local development (mssql-mcp source)
 
-## Submission checklist
+If you develop mssql-mcp alongside this plugin, override the command to use the local build:
 
-- Each plugin has a valid `.cursor-plugin/plugin.json`.
-- Plugin names are unique, lowercase, and kebab-case.
-- `.cursor-plugin/marketplace.json` entries map to real plugin folders.
-- All frontmatter metadata is present in rule, skill, agent, and command files.
-- Logos are committed and referenced with relative paths.
-- `node scripts/validate-template.mjs` passes.
-- Repository link is ready for submission to the Cursor team (Slack or `kniparko@anysphere.com`).
+```json
+{
+  "mcpServers": {
+    "mssql": {
+      "command": "node",
+      "args": ["D:/code/opensource/mssql-mcp/dist/index.js"],
+      "env": {
+        "SERVER_NAME": "localhost",
+        "DATABASE_NAME": "YourDatabase",
+        "DB_USER": "",
+        "DB_PASSWORD": "",
+        "READONLY": "false"
+      }
+    }
+  }
+}
+```
+
+Replace the path with your actual mssql-mcp location. Restart Cursor after changing MCP config.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/review-sql` | Review the current SQL file against T-SQL standards and security rules |
+| `/explore-schema` | List tables and describe schema via mssql-mcp |
+| `/deploy-sql` | Validate and deploy (customize for your pipeline) |
+
+## License
+
+MIT

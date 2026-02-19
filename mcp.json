@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mssql": {
+      "command": "npx",
+      "args": ["-y", "@eamonboyle/mssql-mcp"],
+      "env": {
+        "SERVER_NAME": "localhost",
+        "DATABASE_NAME": "YourDatabase",
+        "DB_USER": "",
+        "DB_PASSWORD": "",
+        "READONLY": "false"
+      }
+    }
+  }
+}

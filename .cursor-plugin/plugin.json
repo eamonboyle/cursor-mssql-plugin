@@ -1,0 +1,13 @@
+{
+  "name": "cursor-mssql-plugin",
+  "displayName": "MSSQL Cursor Plugin",
+  "version": "0.1.0",
+  "description": "One-stop shop for Microsoft MSSQL: T-SQL rules, skills, agents, commands, hooks, and MCP integration for SQL Server development in Cursor.",
+  "author": {
+    "name": "Eamon",
+    "email": "hi@eamonboyle.com"
+  },
+  "license": "MIT",
+  "keywords": ["mssql", "sql-server", "t-sql", "cursor", "mcp", "database"],
+  "logo": "assets/logo.svg"
+}

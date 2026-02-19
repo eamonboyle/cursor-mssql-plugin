@@ -1,0 +1,40 @@
+---
+description: T-SQL naming conventions for tables, columns, stored procedures, and identifiers.
+globs: ["**/*.sql"]
+---
+
+# T-SQL Naming Conventions
+
+## General
+
+- Use underscores to separate words (e.g., `first_name` not `firstName`).
+- Avoid abbreviations unless commonly understood.
+- Names must begin with a letter and may not end with an underscore.
+- Keep the length to a maximum of 30 characters.
+- Use collective terms instead of plurals (e.g., `staff` instead of `employees`).
+
+## Tables
+
+- Avoid underscores in table names unless designating a suffix (e.g., `staff_backup20170101`).
+- Avoid concatenating two table names for relationship tables; prefer descriptive names (e.g., `services` not `cars_mechanics`).
+- Never give a table the same name as one of its columns.
+- Do not prefix with `tbl` or Hungarian notation.
+- Use collective or singular form (e.g., `staff` or `employee`).
+
+## Columns
+
+- Use lowercase except for proper nouns.
+- Do not add a column with the same name as its table.
+- Always use singular names.
+- Use standard suffixes where appropriate: `_id`, `_date`, `_addr`, `_size`, `_count`, `_total`, `_num`, `_name`, `_flag`, `_status`.
+
+## Stored Procedures
+
+- Prefix with `usp_` (not `sp_` which conflicts with system stored procedures).
+- The name must contain a verb.
+
+## Aliasing
+
+- Use explicit alias keywords: `[dbo].[employee] AS [emp]`.
+- For computed data (`SUM()`, `AVG()`), use the name you would give it as a schema column.
+- Correlation names should relate to the object (e.g., first letter of each word).

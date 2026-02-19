@@ -1,0 +1,20 @@
+---
+description: T-SQL coding standards for readable, maintainable SQL Server code. Based on the T-SQL style guide.
+globs: ["**/*.sql"]
+---
+
+# T-SQL Coding Standards
+
+- End each statement with a semicolon.
+- Use `TRY...CATCH` for operationalized DML statements.
+- Use `THROW` instead of `RAISERROR` on SQL Server 2012 or later.
+- Store ISO-8601 compliant datetime information (`YYYY-MM-DD HH:MM:SS.SSSSS`) with `DATE`, `TIME`, `DATETIME2`, and `DATETIMEOFFSET`.
+- Use standard SQL functions instead of Microsoft-specific functions when functionality is the same (portability).
+- Use two-part names for isolated databases and three-part names when outside databases are utilized.
+- Wrap object names in square brackets.
+- Use consistent and descriptive identifiers and names.
+- Use underscores to separate words; avoid camelCase.
+- Include comments where necessary: use `/* */` for blocks or `--` for single lines.
+- Keep code succinct and devoid of redundant SQL.
+- Avoid commenting out old code; use source control instead.
+- Avoid quoted identifiers unless necessary for SQL-92 compatibility.

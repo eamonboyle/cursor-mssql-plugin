@@ -1,0 +1,16 @@
+---
+description: MSSQL security and SQL injection prevention guidelines.
+globs: ["**/*.sql"]
+---
+
+# MSSQL Security Guidelines
+
+- Always use parameterized queries or stored procedures; never concatenate user input into SQL strings.
+- Avoid dynamic SQL unless necessary; when used, validate and sanitize all inputs.
+- Use `QUOTENAME()` and `REPLACE()` for object names in dynamic SQL when building identifiers.
+- Apply the principle of least privilege: grant only required permissions to roles and users.
+- Never store credentials in code or config files; use environment variables or secrets managers.
+- Use `EXECUTE AS` with explicit, limited-privilege users when elevated context is required.
+- Avoid `WITH (NOLOCK)` unless you explicitly accept dirty reads; document the trade-off.
+- Encrypt sensitive data at rest and in transit when applicable.
+- Audit and log privileged operations (DDL, schema changes, bulk operations).
