@@ -50,7 +50,7 @@ If you develop mssql-mcp alongside this plugin, override the command to use the 
   "mcpServers": {
     "mssql": {
       "command": "node",
-      "args": ["D:/code/opensource/mssql-mcp/dist/index.js"],
+      "args": ["D:/code/mssql-mcp/dist/index.js"],
       "env": {
         "SERVER_NAME": "localhost",
         "DATABASE_NAME": "YourDatabase",
@@ -67,11 +67,11 @@ Replace the path with your actual mssql-mcp location. Restart Cursor after chang
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `/review-sql` | Review the current SQL file against T-SQL standards and security rules |
-| `/explore-schema` | List tables and describe schema via mssql-mcp |
-| `/deploy-sql` | Validate and deploy (customize for your pipeline) |
+| Command           | Description                                                            |
+| ----------------- | ---------------------------------------------------------------------- |
+| `/review-sql`     | Review the current SQL file against T-SQL standards and security rules |
+| `/explore-schema` | List tables and describe schema via mssql-mcp                          |
+| `/deploy-sql`     | Validate and deploy (customize for your pipeline)                      |
 
 ## License
 
