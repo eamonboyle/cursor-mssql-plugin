@@ -6,9 +6,14 @@
       "env": {
         "SERVER_NAME": "localhost",
         "DATABASE_NAME": "YourDatabase",
+        "DATABASES": "",
         "DB_USER": "",
         "DB_PASSWORD": "",
-        "READONLY": "false"
+        "READONLY": "false",
+        "CONNECTION_TIMEOUT": "30",
+        "QUERY_TIMEOUT_MS": "30000",
+        "MAX_ROWS": "10000",
+        "TRUST_SERVER_CERTIFICATE": "false"
       }
     }
   }
