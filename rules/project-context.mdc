@@ -9,6 +9,6 @@ This project uses **Microsoft SQL Server** (MSSQL) and **T-SQL** for database de
 
 - **Database**: SQL Server (on-premises, Azure SQL, or compatible)
 - **SQL dialect**: T-SQL
-- **MCP**: When the mssql-mcp server is configured, use its tools (`list_table`, `describe_table`, `read_data`, etc.) to explore schema and run queries before writing or modifying SQL.
+- **MCP**: When [mssql-mcp](https://github.com/eamonboyle/mssql-mcp) is configured, follow a **schema-first** workflow: prefer `list_table` / `list_objects` before `read_data`, `search_data`, or `explain_query`. Use `describe_table` (optional `schemaName`) and `describe_object` for definitions. Write-capable tools (`insert_data`, `update_data`, `delete_data`, DDL) are omitted when `READONLY=true`.
 
-Configure mssql-mcp via environment variables or `mcp.json`: `SERVER_NAME`, `DATABASE_NAME`, `DB_USER`, `DB_PASSWORD`, `READONLY`.
+Configure via `mcp.json` or env: `SERVER_NAME`; `DATABASE_NAME` (optional if `DATABASES` is set); `DB_USER` / `DB_PASSWORD` for SQL auth; optional `DATABASES`, `READONLY`, `CONNECTION_TIMEOUT`, `QUERY_TIMEOUT_MS`, `MAX_ROWS`, `TRUST_SERVER_CERTIFICATE`.
