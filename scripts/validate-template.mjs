@@ -270,11 +270,6 @@ async function validateSinglePlugin(pluginDir, pluginName) {
 
   await validateComponentFrontmatter(pluginDir, pluginName);
 
-  const hooksPath = path.join(pluginDir, "hooks", "hooks.json");
-  if (!(await pathExists(hooksPath))) {
-    addWarning(`${pluginName}: no hooks/hooks.json file found (only needed when using hooks).`);
-  }
-
   const mcpPath = path.join(pluginDir, "mcp.json");
   if (!(await pathExists(mcpPath))) {
     addWarning(`${pluginName}: no mcp.json file found (only needed when using MCP servers).`);
@@ -394,11 +389,6 @@ async function main() {
     }
 
     await validateComponentFrontmatter(pluginDir, entry.name);
-
-    const hooksPath = path.join(pluginDir, "hooks", "hooks.json");
-    if (!(await pathExists(hooksPath))) {
-      addWarning(`${entry.name}: no hooks/hooks.json file found (only needed when using hooks).`);
-    }
 
     const mcpPath = path.join(pluginDir, "mcp.json");
     if (!(await pathExists(mcpPath))) {
