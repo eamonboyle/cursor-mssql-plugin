@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">MSSQL Cursor Plugin Logo</title>
-  <desc id="desc">Microsoft SQL Server database plugin for Cursor.</desc>
-  <rect width="128" height="128" rx="20" fill="#1a1a2e" />
-  <path d="M64 24 L44 52 L64 52 L64 104 L84 52 L64 52 Z" fill="#CC2927" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-  <ellipse cx="64" cy="88" rx="12" ry="4" fill="#CC2927" opacity="0.6"/>
-</svg>

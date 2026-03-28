@@ -9,5 +9,5 @@
   },
   "license": "MIT",
   "keywords": ["mssql", "sql-server", "t-sql", "cursor", "mcp", "database"],
-  "logo": "assets/logo.svg"
+  "logo": "assets/logo.png"
 }
