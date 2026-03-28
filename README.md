@@ -13,6 +13,8 @@ One-stop shop for Microsoft SQL Server development in Cursor: T-SQL rules, skill
 
 This plugin wires in **[mssql-mcp](https://github.com/eamonboyle/mssql-mcp)** (`@eamonboyle/mssql-mcp`) so the model can query and manage SQL Server through MCP. Configure after install:
 
+> **Safety — `READONLY`:** The bundled `mcp.json` sets `READONLY` to `"false"`, so write and DDL MCP tools (insert/update/delete, `create_table`, etc.) are available when credentials allow. For exploration, audits, or when you want the model limited to reads, set `READONLY` to `"true"`; the server then omits those tools. See the tools table below.
+
 1. Edit root `mcp.json` (or your global Cursor MCP config) or export the same variables before starting Cursor.
 2. **Required**: `SERVER_NAME`. **`DATABASE_NAME`**: required for single-database setups; optional when `DATABASES` is set (then used as default if listed).
 3. **SQL authentication**: `DB_USER` and `DB_PASSWORD` (Windows/integrated auth: see the [mssql](https://www.npmjs.com/package/mssql) driver docs).

@@ -9,5 +9,9 @@
   },
   "license": "MIT",
   "keywords": ["mssql", "sql-server", "t-sql", "cursor", "mcp", "database"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eamonboyle/cursor-mssql-plugin.git"
+  },
   "logo": "assets/logo.png"
 }
