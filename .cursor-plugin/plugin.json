@@ -1,8 +1,8 @@
 {
-  "name": "cursor-mssql-plugin",
-  "displayName": "MSSQL Cursor Plugin",
+  "name": "sql-server",
+  "displayName": "SQL Server",
   "version": "0.3.0",
-  "description": "One-stop shop for Microsoft MSSQL: T-SQL rules, skills, agents, and MCP integration (@eamonboyle/mssql-mcp) for SQL Server development in Cursor.",
+  "description": "Develop on Microsoft SQL Server in Cursor: T-SQL rules, skills, and agents, plus database access through the mssql-mcp server (@eamonboyle/mssql-mcp).",
   "author": {
     "name": "Eamon",
     "email": "hi@eamonboyle.com"
@@ -11,7 +11,7 @@
   "keywords": ["mssql", "sql-server", "t-sql", "cursor", "mcp", "database"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/eamonboyle/cursor-mssql-plugin.git"
+    "url": "https://github.com/eamonboyle/cursor-sql-server.git"
   },
   "logo": "assets/logo.png"
 }

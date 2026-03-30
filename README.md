@@ -1,4 +1,4 @@
-# MSSQL Cursor Plugin
+# SQL Server
 
 One-stop shop for Microsoft SQL Server development in Cursor: T-SQL rules, skills, agents, and MCP integration.
 
@@ -11,7 +11,7 @@ One-stop shop for Microsoft SQL Server development in Cursor: T-SQL rules, skill
 
 ## Installation
 
-- **Marketplace:** Install **MSSQL Cursor Plugin** (`cursor-mssql-plugin`) from Cursor’s plugin marketplace (see Cursor’s docs for the current install UI).
+- **Marketplace:** Install **SQL Server** (`sql-server`) from Cursor’s plugin marketplace (see Cursor’s docs for the current install UI).
 - **Local:** Clone or open this repository as the plugin root (folder that contains `.cursor-plugin/`) and enable it as a local plugin per Cursor’s instructions.
 - **After install:** Configure the MCP server and database connection in the **[MCP Configuration](#mcp-configuration)** section below and in root [`mcp.json`](mcp.json). Rules, skills, and agents match the repo layout and are discovered automatically.
 
